@@ -1,0 +1,22 @@
+{
+  "name": "mod2_shaked",
+  "version": "1.0.0",
+  "description": "Module 2 of Ubiqum Course",
+  "main": "index.js",
+  "scripts": {
+    "dev": "live-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shakedme/mod2_shaked.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shakedme/mod2_shaked/issues"
+  },
+  "homepage": "https://github.com/shakedme/mod2_shaked#readme",
+  "devDependencies": {
+    "live-server": "^1.2.0"
+  }
+}
