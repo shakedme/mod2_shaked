@@ -19,6 +19,9 @@ var data = $.getJSON(urlJSON, function(data) {
 
 })
 
+//Check if midname exists
+
+
 function checkMidName(midname) {
     if (midname === null) {
         return "";
@@ -95,6 +98,19 @@ $("input[type='checkbox']").change(function() {
 })
 
 
+//Get all states for dropdown list
+
+$.getJSON('/JSON/states.json', function(dataStates) {
+    $.each(dataStates, function(i, e) {
+        var option = $('<option>');
+        option.text(dataStates[i].code).appendTo('.filterStates');
+
+    })
+  
+
+})
+
+
 //Filtering by states via select input:
 
 //1. On change of the dropdown lists value, store that value into variable 'state',
@@ -110,28 +126,17 @@ $("input[type='checkbox']").change(function() {
 
 
 $("#sel1").change(function() {
-    var state = $(this).val();
-    if (state !== "All States") {
+    var stateFilter = $(this).val();
+    if (stateFilter !== "All States") {
         $("tbody tr").hide();
         $.each($("tbody tr td"), function(i, td) {
-            if ($(td).text() == state) {
+            if ($(td).text() == stateFilter) {
                 $(td).parent("tr").show();
             }
         })
     } else {
         $("tbody tr").show();
     }
- 
+
 
 });
-
-
-
- 
-
-
-
-
-
-
-
