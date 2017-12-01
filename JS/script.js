@@ -28,6 +28,18 @@ function checkMidName(midname) {
 }
 
 
+// Filtering table by party via checkbox:
+
+//1. On change of checkbox input, with a IF statement check which
+//boxes are checked.
+
+//2. Sort through all <TD> elements.
+
+//3. According to which boxes are checked, compare inner text of <TD> elements to value of checked 
+//box.
+
+//4. Hide parent element <TR> of all <TD> elements which contain the same value as the box.
+
 
 
 $("input[type='checkbox']").change(function() {
@@ -82,32 +94,40 @@ $("input[type='checkbox']").change(function() {
     }
 })
 
-// var checked = [];
-// $('input[type="checkbox"]').change(function() {
-//     checked.push($(this).attr('name'));
-//     $.uniqueSort(checked);
-// })
 
-// $.each(checked, function(i, e) {
-//     if (checked[i] !== $("td").text())  {
+//Filtering by states via select input:
 
-//     }
-// })
+//1. On change of the dropdown lists value, store that value into variable 'state',
+//Log variable in console to confirm correct value being stored.
 
+//2. Create IF statement, checking if the stored value is equal to 'All States', 
+//if so than simply show all states on table.
 
-$('#sel1').click(function() {
-            var state =  $(this).val();
-            console.log(state);
-            $.each($("td"), function(i, td) {
-                if ($(td).text().indexOf(state) !== -1) {
-                    $(td).parent("tr").hide();
-                }
-                })
-            })
+//3. If isnt equal, hide all <TR> elements.
+// loop through all <TD> elements, and check if their inner TEXT is equal to our variable STATE,
+// if so, than show their previously hidden parent element, which is  <TR>.
 
 
 
+$("#sel1").change(function() {
+    var state = $(this).val();
+    if (state !== "All States") {
+        $("tbody tr").hide();
+        $.each($("tbody tr td"), function(i, td) {
+            if ($(td).text() == state) {
+                $(td).parent("tr").show();
+            }
+        })
+    } else {
+        $("tbody tr").show();
+    }
+ 
 
+});
+
+
+
+ 
 
 
 
