@@ -4,7 +4,9 @@
   "description": "Module 2 of Ubiqum Course",
   "main": "index.js",
   "scripts": {
-    "dev": "live-server"
+    "server": "live-server",
+    "compileStyle": "node-sass -w scss/style.scss css/style.css",
+    "dev" : "npm-run-all --parallel server compileStyle"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,10 @@
   },
   "homepage": "https://github.com/shakedme/mod2_shaked#readme",
   "devDependencies": {
-    "live-server": "^1.2.0"
+    "live-server": "^1.2.0",
+    "node-sass": "^4.7.2"
+  },
+  "dependencies": {
+    "npm-run-all": "^4.1.2"
   }
 }

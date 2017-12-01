@@ -95,11 +95,23 @@ $("input[type='checkbox']").change(function() {
 // })
 
 
-// $('#sel1').change(function() {
-//             var state =  $(this).val();
-//             $.each($("td"), function(i, td) {
-//                 if ($(td).text().indexOf(state) !== -1) {
-//                     $(td).parent("tr").hide();
-//                 }
-//                 })
-//             })
+$('#sel1').click(function() {
+            var state =  $(this).val();
+            console.log(state);
+            $.each($("td"), function(i, td) {
+                if ($(td).text().indexOf(state) !== -1) {
+                    $(td).parent("tr").hide();
+                }
+                })
+            })
+
+
+
+
+
+
+
+
+
+
+
