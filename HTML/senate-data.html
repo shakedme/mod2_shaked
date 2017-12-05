@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="../CSS/style.css">
 </head>
 
-<body data-name="senate">
+<body data-congress="senate">
     <div class="container">
         <div class="row">
             <div class="col-sm-6"><img class="logo" src="../Images/download.jpg" width="200"></div>
@@ -40,43 +40,42 @@
             <div class="col-sm-10">
                 <h3>Sort by Party:</h3>
                 <label class="checkbox-inline">
-                    <input type="checkbox" name="R" value="Republican">Republican</label>
+                    <input type="checkbox" name="R" value="Republican" checked="checked">Republican</label>
                 <label class="checkbox-inline">
-                    <input type="checkbox" name="D" value="Democrat">Democrat</label>
+                    <input type="checkbox" name="D" value="Democrat" checked="checked">Democrat</label>
                 <label class="checkbox-inline">
-                    <input type="checkbox" name="I" value="Independent">Independent</label>
+                    <input type="checkbox" name="I" value="Independent" checked="checked">Independent</label>
             </div>
             <div class="col-sm-2">
-                 <div class="form-group">
+                <div class="form-group">
                     <label for="sel1">Sort by State:</label>
                     <select class="form-control filterStates" id="sel1">
-                      <option>All States</option>
+                        <option value="">All States</option>
                     </select>
-              
+                </div>
             </div>
         </div>
-    </div>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Full Name</th>
-                    <th>State</th>
-                    <th>Party</th>
-                    <th>Seniority (Y)</th>
-                    <th>Votes %</th>
-                </tr>
-            </thead>
-            <tbody class="poliTable">
-            </tbody>
-        </table>
-    </div>
-    <div id="foot_center" class="footer container">
-        (C) 2016 TGIF | All Rights Reserved
-    </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/JS/script.js"></script>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>State</th>
+                        <th>Party</th>
+                        <th>Seniority (Y)</th>
+                        <th>Votes %</th>
+                    </tr>
+                </thead>
+                <tbody class="poliTable">
+                </tbody>
+            </table>
+        </div>
+        <div id="foot_center" class="footer container">
+            (C) 2016 TGIF | All Rights Reserved
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/JS/script.js"></script>
 </body>
 
 </html>

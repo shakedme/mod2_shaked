@@ -1,26 +1,125 @@
-var chamber = $('body').data('name');
-var urlJSON = '../JSON/113-' + chamber + '-members.json';
 
-var data = $.getJSON(urlJSON, function(data) {
-    console.log("success");
-    var members = data.results[0].members
+//OOP method
 
-    $.each(members, function(i, e) {
-        var table = $("<tr>");
-        $("<td>").append($('<a>').attr('href', members[i].url).text(members[i].first_name + " " + checkMidName(members[i].middle_name) + " " + members[i].last_name)).appendTo(table);
-        $("<td>").text(members[i].state).appendTo(table);
-        $("<td>").text(members[i].party).appendTo(table);
-        $("<td>").text(members[i].seniority).appendTo(table);
-        $("<td>").text(members[i].votes_with_party_pct).appendTo(table);
+//Creating class DataHandler
+
+function DataHandler() {
+
+    this.jsonURL = "";
+    this.rawData = "";
+    this.members = [];
+    this.chamber = "";
+
+    this.init = function() {
+        this.chamber = $("body").data("congress");
+        this.jsonURL = "/JSON/113-" + this.chamber + "-members.json";
+    }
+
+    this.loadJSON = function() {
+        var that = this;
+        $.getJSON(this.jsonURL, function(data) {
+            that.rawData = data;
+            that.members = that.rawData.results[0].members;
+            that.buildSelect();
+            that.buildTable();
+        })
+    }
+
+    this.buildSelect = function() {
+        $.each(this.members, function(i, member) {
+            var option = $('<option>');
+            option.text(member.state).appendTo('#sel1');
+
+        })
+
+    }
+
+    this.buildTable = function() {
+        var table = $(".poliTable");
+        var tableRows = [];
+
+        $.each(this.members, function(i, member) {
+
+            if (tgifFilter[member.party]) {
+                if (tgifFilter.stateSelect == member.state || tgifFilter.stateSelect == "") {
+                    var tr = $("<tr>");
+                    var fullname = member.first_name + " " + checkMidName(member.middle_name) + " " + member.last_name;
+                    tr.append($("<td>").html($("<a>").attr("href", member.url).text(fullname)));
+                    tr.append($("<td>").text(member.state));
+                    tr.append($("<td>").text(member.party));
+                    tr.append($("<td>").text(member.seniority));
+                    tr.append($("<td>").text(member.votes_with_party_pct));
+                    tableRows.push(tr);
+                }
+
+            }
+        })
+        table.append(tableRows);
+    }
 
 
-        $(".poliTable").append(table);
-    })
+    //Emptying out table and then refering to buildTable function in order to
+    //reconstruct based on the new data supplied by tgifFilter.
+
+    this.updateTable = function() {
+        $(".poliTable").html("");
+        this.buildTable();
+
+    }
+
+}
+
+//Creating instance of class Datahandler called MainData
+
+var MainData = new DataHandler();
+
+MainData.init();
+MainData.loadJSON();
+
+//Creating two EventListeners for the SELECT and CHECKBOX inputs.
+
+$("#sel1").on("change", function() {
+    tgifFilter.updateState($(this).val());
 
 })
 
-//Check if midname exists
+$("input[type=checkbox]").on("change", function() {
+    tgifFilter.updateParty($(this).attr('name'), $(this).prop("checked"))
+})
 
+
+//Creating class for filtering via CHECKBOX and SELECT inputs.
+
+
+function Filter() {
+
+    this.D = true;
+    this.R = true;
+    this.I = true;
+
+    this.stateSelect = "";
+
+    this.updateState = function(state) {
+        this.stateSelect = state;
+        MainData.updateTable();
+
+    }
+
+    this.updateParty = function(party, checked) {
+        this[party] = checked;
+        MainData.updateTable();
+
+    }
+
+}
+
+//Creating instance of class Filter called tgifFilter
+
+var tgifFilter = new Filter();
+
+
+
+//Check if midname exists
 
 function checkMidName(midname) {
     if (midname === null) {
@@ -31,112 +130,12 @@ function checkMidName(midname) {
 }
 
 
-// Filtering table by party via checkbox:
+//Switch text in READ MORE button
 
-//1. On change of checkbox input, with a IF statement check which
-//boxes are checked.
-
-//2. Sort through all <TD> elements.
-
-//3. According to which boxes are checked, compare inner text of <TD> elements to value of checked 
-//box.
-
-//4. Hide parent element <TR> of all <TD> elements which contain the same value as the box.
-
-
-
-$("input[type='checkbox']").change(function() {
-    if ($('input[name="R"]').is(':checked') && $('input[name="D"]').is(':checked') && $('input[name="I"]').is(':checked')) {
-        $.each($("td"), function(i, td) {
-            $(td).parent("tr").show();
-        })
-    } else if ($('input[name="R"]').is(':checked') && $('input[name="D"]').is(':checked')) {
-        $("td").parent("tr").show();
-        $.each($("td"), function(i, td) {
-            if ($(td).text().indexOf('I') !== -1) {
-                $(td).parent("tr").hide();
-            }
-        })
-    } else if ($('input[name="R"]').is(':checked') && $('input[name="I"]').is(':checked')) {
-        $("td").parent("tr").show();
-        $.each($("td"), function(i, td) {
-            if ($(td).text().indexOf('D') !== -1) {
-                $(td).parent("tr").hide();
-            }
-        })
-    } else if ($('input[name="D"]').is(':checked') && $('input[name="I"]').is(':checked')) {
-        $("td").parent("tr").show();
-        $.each($("td"), function(i, td) {
-            if ($(td).text().indexOf('R') !== -1) {
-                $(td).parent("tr").hide();
-            }
-        })
-    } else if ($('input[name="I"]').is(':checked')) {
-        $("td").parent("tr").show();
-        $.each($("td"), function(i, td) {
-            if ($(td).text().indexOf('R') !== -1 || $(td).text().indexOf('D') !== -1) {
-                $(td).parent("tr").hide();
-            }
-        })
-    } else if ($('input[name="D"]').is(':checked')) {
-        $("td").parent("tr").show();
-        $.each($("td"), function(i, td) {
-            if ($(td).text().indexOf('I') !== -1 || $(td).text().indexOf('R') !== -1) {
-                $(td).parent("tr").hide();
-            }
-        })
-    } else if ($('input[name="R"]').is(':checked')) {
-        $("td").parent("tr").show();
-        $.each($("td"), function(i, td) {
-            if ($(td).text().indexOf('I') !== -1 || $(td).text().indexOf('D') !== -1) {
-                $(td).parent("tr").hide();
-            }
-        })
+$("#read_button").click(function() {
+    if ($(this).html() == "Read More") {
+        $(this).html("Read Less");
     } else {
-        $("td").parent("tr").show();
+        $(this).html("Read More");
     }
 })
-
-
-//Get all states for dropdown list
-
-$.getJSON('/JSON/states.json', function(dataStates) {
-    $.each(dataStates, function(i, e) {
-        var option = $('<option>');
-        option.text(dataStates[i].code).appendTo('.filterStates');
-
-    })
-  
-
-})
-
-
-//Filtering by states via select input:
-
-//1. On change of the dropdown lists value, store that value into variable 'state',
-//Log variable in console to confirm correct value being stored.
-
-//2. Create IF statement, checking if the stored value is equal to 'All States', 
-//if so than simply show all states on table.
-
-//3. If isnt equal, hide all <TR> elements.
-// loop through all <TD> elements, and check if their inner TEXT is equal to our variable STATE,
-// if so, than show their previously hidden parent element, which is  <TR>.
-
-
-
-$("#sel1").change(function() {
-    var stateFilter = $(this).val();
-    if (stateFilter !== "All States") {
-        $("tbody tr").hide();
-        $.each($("tbody tr td"), function(i, td) {
-            if ($(td).text() == stateFilter) {
-                $(td).parent("tr").show();
-            }
-        })
-    } else {
-        $("tbody tr").show();
-    }
-
-
-});
