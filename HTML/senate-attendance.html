@@ -6,8 +6,8 @@
     <link rel="stylesheet" type="text/css" href="../CSS/style.css">
 </head>
 
-<body data-congress="house">
-    <div class="container backpic" >
+<body data-congress="senate">
+  <div class="container backpic" >
         <div class="row">
             <div class="col-sm-3"><img id="news" src="../Images/news.jpg"></div>
             <div class="col-sm-6 title"><h1 class="center">Transparent Government In Fact</h1></div>
@@ -46,53 +46,70 @@
             </ul>
         </div>
     </nav>
-    <!--Table container-->
-    <div class="container">
-        <h2>Congressmen</h2>
-        <p>The major power of the House is to pass federal legislation that affects the entire country, although its bills must also be passed by the Senate and further agreed to by the U.S. President before becoming law (unless both the House and Senate re-pass the legislation with a two-thirds majority in each chamber). The House has some exclusive powers: the power to initiate revenue bills, to impeach officials (impeached officials are subsequently tried in the Senate), and to elect the U.S. President in case there is no majority in the Electoral College.</p>
-        <p>Each U.S. state is represented in the House in proportion to its population as measured in the census, but every state is entitled to at least one representative. </p>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-10">
-                <h3>Sort by Party:</h3>
-                <label class="checkbox-inline">
-                    <input type="checkbox" name="R" value="Republican" checked="checked">Republican</label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" name="D" value="Democrat" checked="checked">Democrat</label>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label for="sel1">Sort by State:</label>
-                    <select class="form-control filterStates" id="sel1">
-                        <option value="">All States</option>
-                      
-                    </select>
-                </div>
-            </div>
+    <header>
+        <div>
         </div>
-    </div>
-    <div class="table-responsive">
+    </header>
+    <!--Table container-->
+    <div>
+        <h2>Attendance</h2>
+        <p>The Constitution specifies that a majority of members constitutes a quorum to do business in each house. Representatives and senators rarely force the presence of a quorum by demanding quorum calls; thus, in most cases, debates continue even if a majority is not present.</p>
+        <p>The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator stating "aye" or "no" when his or her name is announced. The House reserves roll-call votes for the most formal matters, as a roll-call of all 435 representatives takes quite some time; normally, members vote by electronic device. In the case of a tie, the motion in question fails. In the Senate, the Vice President may (if present) cast the tiebreaking vote.</p>
+        <h2>Senate at a glance</h2>
+        <table id="table1" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Party</th>
+                    <th>Number of Reps</th>
+                    <th>% Voted with Prty</th>
+                </tr>
+            </thead>
+             <tbody>
+                <tr>
+                    <td>Republican</td>
+                    <td class="TD1"></td>
+                    <td class="TD2"></td>
+                </tr>
+                <tr>
+                    <td>Democrat</td>
+                    <td class="TD3"></td>
+                    <td class="TD4"></td>
+                </tr>
+                <tr>
+                    <td>Independent</td>
+                    <td class="TD5"></td>
+                    <td class="TD6"></td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>Least Engaged (Bottom 10% Attendance)</h2>
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Full Name</th>
-                    <th>State</th>
-                    <th>Party</th>
-                    <th>Seniority (Y)</th>
-                    <th>Votes %</th>
+                    <th>Name</th>
+                    <th>Number of Missed Votes</th>
+                    <th>% Missed</th>
                 </tr>
             </thead>
-            <tbody class="poliTable">
+            <tbody id="tbody1">
+            </tbody>
+        </table>
+        <h2>Most Engaged (Top 10% Attendance)</h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Number of Missed Votes</th>
+                    <th>% Missed</th>
+                </tr>
+            </thead>
+            <tbody id="tbody2">
             </tbody>
         </table>
     </div>
-    <div id="foot_center" class="footer container">
-        (C) 2016 TGIF | All Rights Reserved
-    </div>
     <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/JS/script.js"></script>
+    <script type="text/javascript" src="/JS/statistics.js"></script>
 </body>
 
 </html>

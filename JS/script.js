@@ -1,5 +1,4 @@
 
-//OOP method
 
 //Creating class DataHandler
 
@@ -139,3 +138,4 @@ $("#read_button").click(function() {
         $(this).html("Read More");
     }
 })
+

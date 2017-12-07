@@ -4,8 +4,19 @@ body {
     font-family: sarif;
     font-style: initial;
     font-size: 18px;
+    background-image: url(/Images/house.jpg);
 }
-
+/*
+.backpic {
+    width: 100%;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    margin-top: 20px;
+    border: 2px solid black;
+}
+*/  
 #nav {
     margin-top: 20px;
     border: 1px solid black;
@@ -17,8 +28,12 @@ body {
     font-size: 180%;
 }
 
-.logo {
-    margin-top: 20px;
+h1 {
+    font-family: serif;
+    font-style: italic;
+    margin-top: 60px;
+    margin-left: 80px;
+    font-size: 40px;
 }
 
 #foot_center {
@@ -28,15 +43,16 @@ body {
     margin-bottom: 10px;
     padding-bottom: 10px;
     padding-top: 10px;
-    background-color: #e7e7e7;
+    background-color: black;
+    color: white;
 }
 
 #glyph {
-    margin-top: 80px;
+    margin-top: 170px;
 }
 
 #news {
     border-radius: 50px;
     border: 1px solid black;
-    margin-left: 40px;
+    margin-top: 20px;   
 }
